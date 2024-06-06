@@ -173,7 +173,7 @@
             <li><a href="#">services</a></li>
             <li><a href="#">Contact</a></li>
             <form action="Login.jsp" method="get">
-            <li><button class="login-btn">Signup</button></li>
+            <li><button class="login-btn">create account</button></li>
             </form>
         </ul>
     </nav>

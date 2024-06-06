@@ -98,10 +98,6 @@
         <input type="text" id="username" name="username" pattern="[A-Za-z]{4,}" required>
       </div>
       <div class="form-group">
-        <label for="username">Phonenumber:</label>
-        <input type="text" id="username" name="phone" pattern="[0-9]{10}"  required>
-      </div>
-      <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" pattern="^(?=.*[a-z])+@(?=.*[a-z])+.(?=.*[a-z]){6,20}$"  required>
       </div>

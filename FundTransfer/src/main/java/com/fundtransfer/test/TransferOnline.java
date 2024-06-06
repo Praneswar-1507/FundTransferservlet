@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fundtransfer.model.FundTransferPojo;
 import com.fundtransfer.util.Jdbc;
@@ -48,7 +49,7 @@ public class TransferOnline extends HttpServlet {
 		    transfer.setPassword(password);
 		    String action=request.getParameter("action");
 		    System.out.println(action);
-		    if(action!=null)
+//		    HttpSession session = request.getSession();		    if(action!=null)
 		    {
 		    	switch(action)
 		    	{
@@ -71,8 +72,14 @@ public class TransferOnline extends HttpServlet {
 		    		case "login":
 					try {
 						if(crud.login(transfer))
-		    			{
-		    				response.sendRedirect("transfertype.jsp");
+		    			{   
+							
+							  FundTransferPojo id=crud.getid(transfer); 
+							  HttpSession session =request.getSession(); session.setAttribute("user",id);
+							   	 
+							  
+							 
+		    				response.sendRedirect("bankaccount.jsp");
 		    			}
 		    			else
 						{
