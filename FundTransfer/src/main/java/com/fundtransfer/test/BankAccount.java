@@ -40,7 +40,7 @@ public class BankAccount extends HttpServlet {
 		int userid=Integer.parseInt(request.getParameter("id"));
 		String firstName=request.getParameter("firstname");
 		String lastName=request.getParameter("lastname");
-		String phoneNumber=request.getParameter("phonenumber");
+		String phoneNumber=request.getParameter("phonenum");
 		String dob = request.getParameter("dob");
 	    String aadharNumber=request.getParameter("aadharnumber");
 	    String address=request.getParameter("address");

@@ -76,7 +76,7 @@ input[type="submit"]:hover {
         </div>
         <div class="form-group">
             <label for="phonenumber">Phone Number</label>
-            <input type="tel" id="phonenumber" name="phonenumber" required>
+            <input type="tel" id="phonenumber" name="phonenum" required>
         </div>
         <div class="form-group">
             <label for="dob">Date of Birth</label>
@@ -88,7 +88,7 @@ input[type="submit"]:hover {
         </div>
         <div class="form-group">
             <label for="address">Address</label>
-            <input type="text" id="address" name="address" required>
+            <input type="text" id="useraddress" name="address" required>
         </div>
         <div class="form-group">
             <input type="submit" value="Submit">
