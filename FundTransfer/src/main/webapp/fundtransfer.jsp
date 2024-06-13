@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.fundtransfer.model.FundTransferPojo" %>
 <!DOCTYPE html>
-<html>
+<html lang=eng>
 <head>
     <meta charset="UTF-8">
     <title>Fund Transfer Form</title>

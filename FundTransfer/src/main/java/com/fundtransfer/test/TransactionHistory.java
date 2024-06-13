@@ -26,25 +26,22 @@ public class TransactionHistory extends HttpServlet {
      */
     public TransactionHistory() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		int userId=Integer.parseInt(request.getParameter("userId"));
-		System.out.println(userId);
 		ArrayList<TranferAmountPojo> history=null;
 		try {
 			history=crud.TransactionDetails(userId);
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(history);
 		request.setAttribute("usertransaction", history);
 		 request.getRequestDispatcher("transactionhistory.jsp").forward(request, response);
 		
@@ -53,8 +50,9 @@ public class TransactionHistory extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		doGet(request, response);
 	}
 

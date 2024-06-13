@@ -2,10 +2,13 @@ package com.fundtransfer.test;
 
 import java.util.Random;
 
-public class randomGenerator {
-	
+public class RandomGenerator {
+	RandomGenerator(){
+		
+	}
+	 static Random random = new Random();
 	public static String generateRandomAccountNumber() {
-	    Random random = new Random();
+	   
 	    String firstEightDigits = "12345678";
 	    StringBuilder accountNumber = new StringBuilder(firstEightDigits);
 	    
@@ -19,7 +22,7 @@ public class randomGenerator {
 
 	    public static String generateRandomIFSC() {
 	        StringBuilder ifsc = new StringBuilder();
-	        Random random = new Random();
+	       
 	        String pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	        
 	        for (int i = 0; i < 4; i++) {
@@ -27,7 +30,7 @@ public class randomGenerator {
 	            char randomChar = pattern.charAt(randomIndex);
 	            ifsc.append(randomChar);
 	        }
-	        ifsc.append('0'); // Append '0' as a character
+	        ifsc.append('0'); 
 	           
 	        for (int i = 0; i < 6; i++) {
 	            int randomDigit = random.nextInt(10);

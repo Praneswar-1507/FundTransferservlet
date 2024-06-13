@@ -4,7 +4,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.fundtransfer.util.Jdbc"%>
 <!DOCTYPE html>
-<html>
+<html lang=eng>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -195,7 +195,7 @@ table.table td .add {
 						<td><%=view.getPhonenumber() %></td>
 						<td><%=view.getDate() %></td>
 						<td><%=view.getAadharNumber() %></td>
-						<td><%=view.getIFSCcode() %></td>
+						<td><%=view.getiFSCcode() %></td>
 						<td><%=view.getAddress() %></td>
 						<td><%=view.getAccountBalance() %></td>
 						<td><%=view.getAccountId() %></td>

@@ -1,7 +1,7 @@
 package com.fundtransfer.model;
 
 public class FundTransferPojo {
-	String Password, username, email,phonenumber;
+	String password, username, email,phonenumber;
 	int id;
 
 	public FundTransferPojo() {
@@ -41,11 +41,11 @@ public class FundTransferPojo {
 	}
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password= password;
 	}
 
 	
@@ -53,7 +53,7 @@ public class FundTransferPojo {
 
 	public FundTransferPojo(String password, String username, String email, String phonenumber, int id) {
 		super();
-		Password = password;
+		this.password = password;
 		this.username = username;
 		this.email = email;
 		this.phonenumber = phonenumber;
@@ -62,7 +62,7 @@ public class FundTransferPojo {
 
 	@Override
 	public String toString() {
-		return "FundTransferPojo [Password=" + Password + ", username=" + username + ", email=" + email
+		return "FundTransferPojo [Password=" + password + ", username=" + username + ", email=" + email
 				+ ", phonenumber=" + phonenumber + ", id=" + id + "]";
 	}
 

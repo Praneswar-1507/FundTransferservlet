@@ -1,9 +1,9 @@
 package com.fundtransfer.test;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fundtransfer.model.BankAccountPojo;
+
 import com.fundtransfer.model.FundTransferPojo;
 import com.fundtransfer.util.Jdbc;
 
@@ -30,7 +30,6 @@ public class TransferOnline extends HttpServlet {
 	 */
 	public TransferOnline() {
 		super();
-		// TODO Auto-generated constructor stub
 
 	}
 
@@ -38,11 +37,11 @@ public class TransferOnline extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		System.out.println("get");
+		
 
 	}
 
@@ -50,9 +49,9 @@ public class TransferOnline extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 		String username = request.getParameter("username");
 		String phonenumber = request.getParameter("phone");
@@ -63,9 +62,8 @@ public class TransferOnline extends HttpServlet {
 		transfer.setEmail(email);
 		transfer.setPassword(password);
 		String action = request.getParameter("action");
-		System.out.println(action);
 
-		{
+		
 			switch (action) {
 			case "register":
 				try {
@@ -76,7 +74,6 @@ public class TransferOnline extends HttpServlet {
 					}
 
 				} catch (ClassNotFoundException | SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
@@ -87,7 +84,7 @@ public class TransferOnline extends HttpServlet {
 						FundTransferPojo id = crud.getid(transfer);
 						HttpSession session = request.getSession();
 						session.setAttribute("user", id);
-						System.out.println(id);
+						
 
 						
 						if (email.endsWith("@fastpay.com")) {
@@ -99,20 +96,20 @@ public class TransferOnline extends HttpServlet {
 							response.sendRedirect("home1.jsp");
 						}
 
-						/*
-						 * response.sendRedirect("bankaccount.jsp");
-						 */ } else {
+					
+						  } else {
 						response.sendRedirect("signup.jsp");
 					}
 				} catch (ClassNotFoundException | SQLException | IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				break;
+				default:
+					return;
 			
 			}
 		}
 
 	}
 
-}
+

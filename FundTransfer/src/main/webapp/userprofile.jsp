@@ -5,7 +5,7 @@
 <%@ page import="com.fundtransfer.model.FundTransferPojo" %>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!DOCTYPE html>
-<html>
+<html lang=eng>
 <head>
     <meta charset="UTF-8">
     <title>Fastpay</title>
@@ -242,7 +242,7 @@
     </div>
 </div>
 
-<!-- Popup Forms -->
+
 <div id="phoneNumberPopup" class="popup">
     <div class="popup-content">
         <span class="close" onclick="closePopup('phoneNumberPopup')">&times;</span>
@@ -269,7 +269,7 @@
     </div>
 </div>
 
-<!-- Deposit Popup -->
+
 <div id="depositPopup" class="popup">
     <div class="popup-content">
         <span class="close" onclick="closePopup('depositPopup')">&times;</span>

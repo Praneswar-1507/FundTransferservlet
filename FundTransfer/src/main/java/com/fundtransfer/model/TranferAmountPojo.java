@@ -3,9 +3,13 @@ package com.fundtransfer.model;
 import java.time.LocalDate;
 
 public class TranferAmountPojo {
-String SendAccountNo,RecepientAccountNo;
-int Amount,transferId,userId;
-String IFSC,date,transfertype;
+String sendAccountNo,recepientAccountNo;
+int amount,transferId,userId;
+String iFSC,date,transfertype;
+
+
+
+
 
 
 
@@ -14,27 +18,27 @@ String IFSC,date,transfertype;
 
 
 public String getSendAccountNo() {
-	return SendAccountNo;
+	return sendAccountNo;
 }
 
 public void setSendAccountNo(String sendAccountNo) {
-	SendAccountNo = sendAccountNo;
+	this.sendAccountNo = sendAccountNo;
 }
 
 public String getRecepientAccountNo() {
-	return RecepientAccountNo;
+	return recepientAccountNo;
 }
 
 public void setRecepientAccountNo(String recepientAccountNo) {
-	RecepientAccountNo = recepientAccountNo;
+	this.recepientAccountNo = recepientAccountNo;
 }
 
 public int getAmount() {
-	return Amount;
+	return amount;
 }
 
 public void setAmount(int amount) {
-	Amount = amount;
+	this.amount = amount;
 }
 
 public int getTransferId() {
@@ -53,12 +57,12 @@ public void setUserId(int userId) {
 	this.userId = userId;
 }
 
-public String getIFSC() {
-	return IFSC;
+public String getiFSC() {
+	return iFSC;
 }
 
-public void setIFSC(String iFSC) {
-	IFSC = iFSC;
+public void setiFSC(String iFSC) {
+	this.iFSC = iFSC;
 }
 
 public String getDate() {
@@ -77,17 +81,15 @@ public void setTransfertype(String transfertype) {
 	this.transfertype = transfertype;
 }
 
-
-
 public TranferAmountPojo(String sendAccountNo, String recepientAccountNo, int amount, int transferId, int userId,
 		String iFSC, String date, String transfertype) {
 	super();
-	SendAccountNo = sendAccountNo;
-	RecepientAccountNo = recepientAccountNo;
-	Amount = amount;
+	this.sendAccountNo = sendAccountNo;
+	this.recepientAccountNo = recepientAccountNo;
+	this.amount = amount;
 	this.transferId = transferId;
 	this.userId = userId;
-	IFSC = iFSC;
+	this.iFSC = iFSC;
 	this.date = date;
 	this.transfertype = transfertype;
 }
@@ -98,8 +100,8 @@ public TranferAmountPojo() {
 
 @Override
 public String toString() {
-	return "TranferAmountPojo [SendAccountNo=" + SendAccountNo + ", RecepientAccountNo=" + RecepientAccountNo
-			+ ", Amount=" + Amount + ", transferId=" + transferId + ", userId=" + userId + ", IFSC=" + IFSC + ", date="
+	return "TranferAmountPojo [SendAccountNo=" + sendAccountNo + ", RecepientAccountNo=" + recepientAccountNo
+			+ ", Amount=" + amount + ", transferId=" + transferId + ", userId=" + userId + ", IFSC=" + iFSC + ", date="
 			+ date + ", transfertype=" + transfertype + "]";
 }
 

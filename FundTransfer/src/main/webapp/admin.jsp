@@ -4,7 +4,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.fundtransfer.util.Jdbc"%>
 <!DOCTYPE html>
-<html>
+<html lang=eng>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -165,24 +165,24 @@ table.table td .add {
             
                 <table border="1" class="table">
                     <tr>
-                        <td style="width: 8%;">ID</td>
-                        <td style="width: 20%;">FirstName</td>
-                        <td style="width: 20%;">LastName</td>
-                        <td style="width: 30%;">PhoneNumber</td>
-                        <td style="width: 20%;">Date</td>
-                        <td style="width: 30%;">AadharNumber</td>
-                        <td style="width: 30%;">IFSCcode</td>
-                        <td style="width: 40%;">Address</td>
-                        <td style="width: 18%;">Balance</td>
-                         <td style="width: 30%;">AccountId</td>
-                          <td style="width: 30%;">GenerateId</td>
+                        <th style="width: 8%;">ID</th>
+                        <th style="width: 20%;">FirstName</th>
+                        <th style="width: 20%;">LastName</th>
+                        <th style="width: 30%;">PhoneNumber</th>
+                        <th style="width: 20%;">Date</th>
+                        <th style="width: 30%;">AadharNumber</th>
+                        <th style="width: 30%;">IFSCcode</th>
+                        <th style="width: 40%;">Address</th>
+                        <th style="width: 18%;">Balance</th>
+                         <th style="width: 30%;">AccountId</th>
+                          <th style="width: 30%;">GenerateId</th>
                          
                         
                     </tr>
                     <tbody>
                         <% 
                       Jdbc jdbc=new Jdbc();
-                        ArrayList<BankAccountPojo> array =jdbc.Read();
+                        ArrayList<BankAccountPojo> array =jdbc.read();
                         for (BankAccountPojo view : array) { 
                         %>
                         <tr>
@@ -192,7 +192,7 @@ table.table td .add {
                             <td><%=view.getPhonenumber() %></td>
                             <td><%=view.getDate() %></td>
                             <td><%=view.getAadharNumber() %></td>
-                            <td><%=view.getIFSCcode() %></td>
+                            <td><%=view.getiFSCcode() %></td>
                             <td><%=view.getAddress() %></td>
                            <td><%=view.getAccountBalance() %></td>
                            <td><%=view.getAccountId() %></td>

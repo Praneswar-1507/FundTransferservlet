@@ -1,11 +1,10 @@
 package com.fundtransfer.test;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,27 +13,27 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.fundtransfer.model.BankAccountPojo;
-import com.fundtransfer.model.TranferAmountPojo;
+
 import com.fundtransfer.util.Jdbc;
 
 @WebServlet("/BankAccount")
 public class BankAccount extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	BankAccountPojo account = new BankAccountPojo();
-	Jdbc crud = new Jdbc();
-   randomGenerator generate=new randomGenerator(); 
+	 BankAccountPojo account = new BankAccountPojo();
+	 Jdbc crud = new Jdbc();
+    RandomGenerator generate=new RandomGenerator(); 
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public BankAccount() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 
 
-		
+    @Override	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String userid=request.getParameter("id");
@@ -52,20 +51,20 @@ public class BankAccount extends HttpServlet {
 	  
 	    account.setFirstName(firstName);
 	    account.setLastName(lastName);
-	    account.setIFSCcode(generate.generateRandomIFSC());
+	    account.setiFSCcode(generate.generateRandomIFSC());
 	    account.setPhonenumber(phoneNumber);
 	    account.setDate(dob);
 	    account.setAadharNumber(aadharNumber);
 	    account.setAddress(address);
 	    String action=request.getParameter("action");
-	    System.out.println(action);
+	   
 
 	    switch(action)
 	    {
 	    case "registered" :
 	    
 	    try {
-			if(crud.BankAccountInsert(account))
+			if(crud.bankAccountInsert(account))
 			{
 				response.sendRedirect("home1.jsp");
 			}
@@ -75,7 +74,7 @@ public class BankAccount extends HttpServlet {
 			}
 				
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+	
 			e.printStackTrace();
 		}
 	    break;
@@ -88,7 +87,7 @@ public class BankAccount extends HttpServlet {
 	    	try {
 				crud.insertGeneratedIdForUser(generateid, account);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 	    	  Jdbc viewApproved  = new Jdbc();     
@@ -97,9 +96,9 @@ public class BankAccount extends HttpServlet {
 		       
 		            try {
 						approvedUsers =viewApproved.getApprovedUsers();
-						System.out.println(approvedUsers);
+						
 					} catch (ClassNotFoundException | SQLException e) {
-						// TODO Auto-generated catch block
+						
 						e.printStackTrace();
 					}
 		       
@@ -115,37 +114,36 @@ public class BankAccount extends HttpServlet {
 	    	try {
 	    	
 	    		
-	    		request.setAttribute("userData", crud.Read1(userId));
+	    		request.setAttribute("userData", crud.read1(userId));
 	    		request.getRequestDispatcher("userprofile.jsp").forward(request, response);
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 	    	break;
 	    case "deposit":
 	    	 int userID = Integer.parseInt(request.getParameter("accountId"));
 	    	 int depositAmount=Integer.parseInt(request.getParameter("amount"));
-	    	 System.out.println(depositAmount);
 	    	 int balance = 0;
 	    	 try {
-				BankAccountPojo userAccount = crud.Read1(userID);
+				BankAccountPojo userAccount = crud.read1(userID);
 				balance=userAccount.getAccountBalance()+depositAmount;
 				
-				System.out.println(balance);
+		
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 	    	 try {
 					crud.updatedAccountBalance(userID, balance);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
 	    	 try {
-				request.setAttribute("userData", crud.Read1(userID));
+				request.setAttribute("userData", crud.read1(userID));
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 	    	 
@@ -157,13 +155,13 @@ public class BankAccount extends HttpServlet {
 	    	try {
 				crud.updatePhoneNumber(id, updatedNumber);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 	    	try {
-				request.setAttribute("userData", crud.Read1(id));
+				request.setAttribute("userData", crud.read1(id));
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 	    	 request.getRequestDispatcher("userprofile.jsp").forward(request, response);
@@ -174,19 +172,23 @@ public class BankAccount extends HttpServlet {
 	    	try {
 				crud.updateAddress(idAddress, updatedAddress);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 	    	try {
-				request.setAttribute("userData", crud.Read1(idAddress));
+				request.setAttribute("userData", crud.read1(idAddress));
 			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 	    	request.getRequestDispatcher("userprofile.jsp").forward(request, response);
-	         
+	    	break;
+	      default:
+	    	  return;
+	     
 	    
 	    }
+	 
 	  
 	     
 	

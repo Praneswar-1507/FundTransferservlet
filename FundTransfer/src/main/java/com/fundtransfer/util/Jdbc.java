@@ -8,14 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Random;
 
-import javax.servlet.http.HttpSession;
+
+
 
 import com.fundtransfer.model.BankAccountPojo;
 import com.fundtransfer.model.FundTransferPojo;
 import com.fundtransfer.model.TranferAmountPojo;
-import com.fundtransfer.util.Util;
+
 
 public class Jdbc {
 public boolean register(FundTransferPojo transfer) throws ClassNotFoundException, SQLException {
@@ -33,7 +33,6 @@ public boolean register(FundTransferPojo transfer) throws ClassNotFoundException
             p.setString(2,transfer.getEmail() );
             p.setString(3,transfer.getPassword());
             p.execute();
-            System.out.println("registered  successfull");
             return true;
         } else {
             return false;
@@ -58,7 +57,7 @@ public static boolean login(FundTransferPojo transfer) throws ClassNotFoundExcep
         
     
 }
-public boolean BankAccountInsert(BankAccountPojo account) throws ClassNotFoundException, SQLException {
+public boolean bankAccountInsert(BankAccountPojo account) throws ClassNotFoundException, SQLException {
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	Connection connection = Util.getConnection();
 	 String query = "SELECT user_ID FROM Accounts WHERE user_ID=? and aadhar_number=?";
@@ -69,7 +68,6 @@ public boolean BankAccountInsert(BankAccountPojo account) throws ClassNotFoundEx
      if (!result.next()) {
 	String check = "insert into Accounts(user_ID,account_ID,first_name,Last_name,phonenumber,date_of_birth,aadhar_number,IFSC,residential_address) values(?,?,?,?,?,?,?,?,?)";
 	PreparedStatement p = connection.prepareStatement(check);
-	System.out.println();
 	p.setInt(1,account.getUserId());
 	p.setString(2,account.getAccountId());
 	p.setString(3,account.getFirstName());
@@ -78,13 +76,12 @@ public boolean BankAccountInsert(BankAccountPojo account) throws ClassNotFoundEx
 	Date currentDate = Date.valueOf(LocalDate.now());
 	p.setString(6,account.getDate() );
 	p.setString(7,account.getAadharNumber());
-	 p.setString(8,account.getIFSCcode());
+	 p.setString(8,account.getiFSCcode());
 	 p.setString(9,account.getAddress());
 	 p.executeUpdate();
 	 return true;
      }
      else {
-    	 System.out.println("Already have an account ");
          return false;
         
 
@@ -99,7 +96,7 @@ public static void insert(TranferAmountPojo amount) throws ClassNotFoundExceptio
 	p.setInt(1,amount.getUserId());
 	p.setString(2,amount.getSendAccountNo());
 	p.setString(3,amount.getRecepientAccountNo());
-	p.setString(4,amount.getIFSC());
+	p.setString(4,amount.getiFSC());
 	p.setString(5,amount.getTransfertype());
 	Date currentDate = Date.valueOf(LocalDate.now());
 	p.setDate(6,currentDate );
@@ -119,8 +116,6 @@ public FundTransferPojo getid(FundTransferPojo transfer) throws ClassNotFoundExc
             String name=re.getString("user_name");
             a.setId(id);
             a.setUsername(name);
-            System.out.println("User ID retrieved: " + id);
-            System.out.println("name:"+name);
             return a;
         }
     } catch (SQLException e) {
@@ -134,18 +129,17 @@ public FundTransferPojo getid(FundTransferPojo transfer) throws ClassNotFoundExc
     }
     return null;
 }
-public BankAccountPojo getUserData(BankAccountPojo BankAccount) throws ClassNotFoundException, SQLException {
+public BankAccountPojo getUserData(BankAccountPojo bankAccount) throws ClassNotFoundException, SQLException {
     Connection con = Util.getConnection();
     String query = "SELECT * FROM Accounts WHERE aadhar_number=?";
     BankAccountPojo getdata=new BankAccountPojo();
     try (PreparedStatement p = con.prepareStatement(query)) {
-        p.setString(1,BankAccount.getAadharNumber());
+        p.setString(1,bankAccount.getAadharNumber());
         ResultSet re = p.executeQuery();
         
         if (re.next()) {
             String accountId = re.getString("account_ID");
-            BankAccount.setAccountId(accountId);
-            System.out.println("User ID retrieved: " + accountId);
+            bankAccount.setAccountId(accountId);
            
             return getdata;
         }
@@ -160,7 +154,7 @@ public BankAccountPojo getUserData(BankAccountPojo BankAccount) throws ClassNotF
     }
     return null;
 }
-public ArrayList<BankAccountPojo> Read() throws ClassNotFoundException, SQLException {
+public ArrayList<BankAccountPojo> read() throws ClassNotFoundException, SQLException {
 	ArrayList<BankAccountPojo> user = new ArrayList<BankAccountPojo>();
 	Connection connection = Util.getConnection();
 	String query = "Select * from accounts";
@@ -174,7 +168,7 @@ public ArrayList<BankAccountPojo> Read() throws ClassNotFoundException, SQLExcep
 		bankaccount.setPhonenumber(rs.getString("phonenumber"));
 		bankaccount.setDate(rs.getString("date_of_birth"));
 		bankaccount.setAadharNumber(rs.getString("aadhar_number"));
-		bankaccount.setIFSCcode(rs.getString("IFSC"));
+		bankaccount.setiFSCcode(rs.getString("IFSC"));
 		bankaccount.setAddress(rs.getString("residential_address"));
 		bankaccount.setAccountBalance(rs.getInt("account_Balance"));
 		bankaccount.setAccountId(rs.getString("account_ID"));
@@ -183,7 +177,7 @@ public ArrayList<BankAccountPojo> Read() throws ClassNotFoundException, SQLExcep
 
 	return user;
 }
-public BankAccountPojo Read1(int id) throws ClassNotFoundException, SQLException {
+public BankAccountPojo read1(int id) throws ClassNotFoundException, SQLException {
 	BankAccountPojo bankaccount = new BankAccountPojo();
 	Connection connection = Util.getConnection();
 	String query = "Select * from accounts where user_ID=?";
@@ -198,7 +192,7 @@ public BankAccountPojo Read1(int id) throws ClassNotFoundException, SQLException
 		bankaccount.setPhonenumber(rs.getString("phonenumber"));
 		bankaccount.setDate(rs.getString("date_of_birth"));
 		bankaccount.setAadharNumber(rs.getString("aadhar_number"));
-		bankaccount.setIFSCcode(rs.getString("IFSC"));
+		bankaccount.setiFSCcode(rs.getString("IFSC"));
 		bankaccount.setAddress(rs.getString("residential_address"));
 		bankaccount.setAccountBalance(rs.getInt("account_Balance"));
 		bankaccount.setAccountId(rs.getString("account_ID"));
@@ -207,8 +201,7 @@ public BankAccountPojo Read1(int id) throws ClassNotFoundException, SQLException
 	
 }
 public ArrayList<TranferAmountPojo> TransactionDetails(int id) throws ClassNotFoundException, SQLException {
-	System.out.println(id);
-	ArrayList<TranferAmountPojo> transactionList = new ArrayList<TranferAmountPojo>();
+	ArrayList<TranferAmountPojo> transactionList = new ArrayList<>();
 	Connection connection = Util.getConnection();
 	String query = "Select * from Transfers where user_ID=?";
 	PreparedStatement p = connection.prepareStatement(query);
@@ -221,7 +214,7 @@ public ArrayList<TranferAmountPojo> TransactionDetails(int id) throws ClassNotFo
 		transaction.setSendAccountNo(rs.getString("sender_Account_ID"));
 		transaction.setRecepientAccountNo(rs.getString("Recipient_ID"));
 		transaction.setDate(rs.getString("transfer_Date"));
-		transaction.setIFSC(rs.getString("IFSC_code"));
+		transaction.setiFSC(rs.getString("IFSC_code"));
 		transaction.setTransfertype(rs.getString("transfer_Type"));
 	    transaction.setAmount(rs.getInt("transfer_Amount"));
 	    transactionList.add(transaction);
@@ -230,8 +223,6 @@ public ArrayList<TranferAmountPojo> TransactionDetails(int id) throws ClassNotFo
 	
 }
 public void insertGeneratedIdForUser(int userId,BankAccountPojo account) throws Exception {
-	System.out.println(userId);
-	System.out.println(account.getAccountId());
     Connection connection = Util.getConnection(); 
     String query = "UPDATE Accounts SET account_ID=?,is_approval =true  WHERE user_ID = ?";
     PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -254,7 +245,6 @@ public boolean bankAccount(FundTransferPojo transfer) throws ClassNotFoundExcept
         p.setString(2,transfer.getEmail() );
         p.setString(3,transfer.getPassword());
         p.execute();
-        System.out.println("registered  successfull");
         return true;
     } else {
         return false;
@@ -280,7 +270,7 @@ public ArrayList<BankAccountPojo> getApprovedUsers() throws ClassNotFoundExcepti
         	Approveddetails.setPhonenumber(resultSet.getString("phonenumber"));
         	Approveddetails.setDate(resultSet.getString("date_of_birth"));
         	Approveddetails.setAadharNumber(resultSet.getString("aadhar_number"));
-        	Approveddetails.setIFSCcode(resultSet.getString("IFSC"));
+        	Approveddetails.setiFSCcode(resultSet.getString("IFSC"));
         	Approveddetails.setAddress(resultSet.getString("residential_address"));
         	Approveddetails.setAccountBalance(resultSet.getInt("account_Balance"));
         	Approveddetails.setAccountId(resultSet.getString("account_ID"));
@@ -317,8 +307,7 @@ public void updatePhoneNumber(int userId,String phoneNumber) throws Exception {
     preparedStatement.executeUpdate();
 }
 public void updateAddress(int userId,String address) throws Exception {
-	System.out.println(address);
-	System.out.println(userId);
+	
     Connection connection = Util.getConnection(); 
     String query = "UPDATE Accounts SET residential_address=?  WHERE user_ID = ?";
     PreparedStatement preparedStatement = connection.prepareStatement(query);

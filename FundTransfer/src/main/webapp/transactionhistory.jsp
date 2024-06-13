@@ -2,7 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.fundtransfer.model.TranferAmountPojo"%>
 <!DOCTYPE html>
-<html>
+<html lang=eng>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
