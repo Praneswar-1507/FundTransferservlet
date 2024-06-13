@@ -91,18 +91,31 @@ public void setUserId(int userId) {
 public BankAccountPojo(String firstName, String lastName, String phonenumber, String date, String aadharNumber,
 		String iFSCcode, String address, String accountId, int accountBalance, int userId) {
 	super();
-	FirstName = firstName;
-	LastName = lastName;
+	this.FirstName = firstName;
+	this.LastName = lastName;
 	this.phonenumber = phonenumber;
 	this.date = date;
 	this.aadharNumber = aadharNumber;
-	IFSCcode = iFSCcode;
+	this.IFSCcode = iFSCcode;
 	this.address = address;
 	this.accountId = accountId;
 	this.accountBalance = accountBalance;
 	this.userId = userId;
 }
-
+public BankAccountPojo(int userId,String firstName, String lastName, String phonenumber, String date, String aadharNumber,
+		String iFSCcode, String address, String accountId, int accountBalance) {
+	super();
+	this.userId = userId;
+	this.FirstName = firstName;
+	this.LastName = lastName;
+	this.phonenumber = phonenumber;
+	this.date = date;
+	this.aadharNumber = aadharNumber;
+	this.IFSCcode = iFSCcode;
+	this.address = address;
+	this.accountBalance = accountBalance;
+	this.accountId = accountId;
+}
 @Override
 public String toString() {
 	return "BankAccountPojo [FirstName=" + FirstName + ", LastName=" + LastName + ", phonenumber=" + phonenumber

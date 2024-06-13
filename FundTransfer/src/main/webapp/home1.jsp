@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ page import="com.fundtransfer.model.FundTransferPojo" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,12 +175,21 @@
             <li><a href="#">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Services</a></li>
+               <% 
+               FundTransferPojo userId=(FundTransferPojo)session.getAttribute("user"); 
+    
+    %>
+            <form action="BankAccount" method="post">
+                    <input type="hidden" name="action" value="login2"> 
+                    <input type="hidden" value="<%=userId.getId()%>" name="id">
+                    <button type="submit" class="login-btn" ><%=userId.getUsername()%></button>
+                </form>
             <li><a href="#">Contact</a></li>
             <li>
-                <form action="Login.jsp" method="get">
+                <form action="home.jsp" method="post">
                     <input type="hidden" name="login" value="login1"> 
-                    <button type="submit" class="login-btn">Login</button>
-                </form>
+                    <button type="submit" class="login-btn">Logout</button>
+                </form> 
             </li>
         </ul>
     </nav>
@@ -188,7 +200,10 @@
             <div class="intro">
                 <h1>Welcome to FundTransfer</h1>
                 <p>Your trusted platform for secure money transfers.</p>
-               
+                <form action="bankaccount.jsp" method="post">
+                    <input type="hidden" name="login" value="createAccount"> 
+                    <button type="submit">Create Account</button>
+                </form>
             </div>
         </div>
     </main>
@@ -204,3 +219,4 @@
     </footer>
 </body>
 </html>
+    

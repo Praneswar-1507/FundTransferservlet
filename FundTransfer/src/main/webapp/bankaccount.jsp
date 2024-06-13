@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="com.fundtransfer.model.FundTransferPojo" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +67,6 @@ input[type="submit"]:hover {
     <h2>Bank Account Opening Form</h2>
     <form action="BankAccount" method="post">
         <div class="form-group">
-          <input type="text" value="<%= request.getAttribute("user") %>" name="id">
             <label for="firstname">First Name</label>
             <input type="text" id="firstname" name="firstname" required>
         </div>
@@ -76,7 +76,7 @@ input[type="submit"]:hover {
         </div>
         <div class="form-group">
             <label for="phonenumber">Phone Number</label>
-            <input type="tel" id="phonenumber" name="phonenum" required>
+            <input type="tel" id="phonenumber" name="phonenum" pattern="[0-9]{10}" required>
         </div>
         <div class="form-group">
             <label for="dob">Date of Birth</label>
@@ -84,14 +84,20 @@ input[type="submit"]:hover {
         </div>
         <div class="form-group">
             <label for="aadharnumber">Aadhar Number</label>
-            <input type="number" id="aadharnumber" name="aadharnumber" required>
+            <input type="number" id="aadharnumber" name="aadharnumber" pattern="[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$" required>
         </div>
         <div class="form-group">
             <label for="address">Address</label>
             <input type="text" id="useraddress" name="address" required>
         </div>
+        <% 
+        FundTransferPojo userId=(FundTransferPojo)session.getAttribute("user"); 
+    
+    %>
+    <input type="hidden" value="<%=userId.getId()%>" name="id">
         <div class="form-group">
-            <input type="submit" value="Submit">
+            <input type="hidden" name="action" value="registered">
+            <button type="submit"> submit </button>
         </div>
     </form>
 </div>

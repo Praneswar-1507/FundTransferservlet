@@ -78,7 +78,7 @@
 
 <div class="container">
   <div class="box">
-    <a href="fundtransfer.jsp?transferType=RTGS">
+<a href="fundtransfer.jsp?transferType=RTGS&accountId=<%= request.getParameter("accountNo") %>">
       <div class="card">
         <div class="card-header">RTGS</div>
         <div class="card-text">
@@ -88,7 +88,7 @@
     </a>
   </div>
   <div class="box">
-    <a href="fundtransfer.jsp?transferType=NEFT">
+    <a href="fundtransfer.jsp?transferType=NEFT&accountId=<%= request.getParameter("accountNo") %>">
       <div class="card">
         <div class="card-header">NEFT</div>
         <div class="card-text">
@@ -98,7 +98,7 @@
     </a>
   </div>
   <div class="box">
-    <a href="fundtransfer.jsp?transferType=IMPS">
+    <a href="fundtransfer.jsp?transferType=IMPS&accountId=<%= request.getParameter("accountNo") %>">
       <div class="card">
         <div class="card-header">IMPS</div>
         <div class="card-text">

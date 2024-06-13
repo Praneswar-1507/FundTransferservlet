@@ -17,7 +17,7 @@
     --text-color: #8590AD;
 }
 
-/*=== Font and typography ===*/
+
 :root{
     --body-font: 'Roboto', sans-serif;
     --big-font-size: 2rem;
@@ -31,7 +31,7 @@
     }  
 }
 
-/*===== BASE =====*/
+
 *,::before,::after{
     box-sizing: border-box;
 }
@@ -76,7 +76,7 @@ img{
     right: -5.5rem;
     transform: rotate(180deg);
 }
-/*=== Form ===*/
+
 .form{
     height: 100vh;
     display: grid;
@@ -103,7 +103,7 @@ img{
     padding: .25rem 0;
     border-bottom: 1px solid var(--text-color);
 }
-/*=== Div focus ===*/
+
 .form__div.focus{
     border-bottom: 1px solid var(--first-color);
 }
@@ -254,18 +254,19 @@ img{
             transition: color 0.3s;
         }
         .form__signup-link:hover {
-            color: #1976D2; /* Change to your desired hover color */
+            color: #1976D2; 
         }
         
     </style>
 </head>
- <div class="l-form">
+<body>
+    <div class="l-form">
         <div class="shape1"></div>
         <div class="shape2"></div>
 
         <div class="form">
             <img src="login.jpg" alt="image" class="form__img">
-            <form action="TransferOnline" method="get" class="form__content">
+            <form action="TransferOnline" method="post" class="form__content">
                 <h1 class="form__title">Welcome</h1>
 
                 <div class="form__div form__div-one">
@@ -274,33 +275,30 @@ img{
                     </div>
                     <div class="form__div-input">
                         <label for="username" class="form__label"></label>
-                        <input type="text" id="username" name="username" placeholder="Username" required class="form__input">
+                        <input type="text" id="username" name="email" placeholder="Email" required class="form__input">
                     </div>
                 </div>
 
                 <div class="form__div">
                     <div class="form__icon">
-                        <i class='bx bx-lock' ></i>
+                        <i class='bx bx-lock'></i>
                     </div>
                     <div class="form__div-input">
                         <label for="password" class="form__label"></label>
-                        <input type="password" id="password" name="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[&^%$#@]).{5,}"  class="form__input">
+                        <input type="password" id="password" name="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[&^%$#@]).{5,}" class="form__input">
                     </div>
                 </div>
                 <a href="#" class="form__forgot">Forgot Password?</a>
-         		<input type="hidden" name="action" value="login">
-                <input type="submit"  class="form__button" >
-              
-                
-       
+                <input type="hidden" name="action" value="login1">
+                <input type="submit" class="form__button">
+
                 <div class="form__signup">
                     <p class="form__signup-text">Don't have an account?</p>
                     <a href="signup.jsp" class="form__signup-link">Sign up here</a>
                 </div>
-            
             </form>
         </div>
     </div>
     <script src="assets/js/main.js"></script>
-</body>
+ </body>
 </html>

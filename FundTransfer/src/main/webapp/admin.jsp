@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="com.fundtransfer.model.FundTransferPojo"%>
+    <%@ page import="com.fundtransfer.model.BankAccountPojo"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.fundtransfer.util.Jdbc"%>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ body {
 }
 
 .table-wrapper {
-	width: 100%;
+	width: 90%;
 	margin: 30px auto;
 	background: #fff;
 	padding: 20px;
@@ -58,7 +58,7 @@ body {
 
 table.table {
 	table-layout: fixed;
-	width: 800px; /* Set the width of the table */
+	width:  100%; /* Set the width of the table */
 	margin: auto; /* Center the table horizontally */
 }
 
@@ -159,52 +159,56 @@ table.table td .add {
                         <h2>User <b>Details</b></h2>
                     </div>
                     <div class="col-sm-4">
-                    <form action="TransferOnline" method="get">
-                        <div class="search-container">
-                            <input type="text" placeholder="Search..."name="search" >
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </div>
-                        </form>
                     </div>
                 </div>
             </div>
-            <form>
+            
                 <table border="1" class="table">
                     <tr>
-                        <td style="width: 10%;">ID</td>
-                        <td style="width: 20%;">UserName</td>
-                        <td style="width: 20%;">Email ID</td>
-                        <td style="width: 20%;">Password</td>
+                        <td style="width: 8%;">ID</td>
+                        <td style="width: 20%;">FirstName</td>
+                        <td style="width: 20%;">LastName</td>
+                        <td style="width: 30%;">PhoneNumber</td>
+                        <td style="width: 20%;">Date</td>
+                        <td style="width: 30%;">AadharNumber</td>
+                        <td style="width: 30%;">IFSCcode</td>
+                        <td style="width: 40%;">Address</td>
+                        <td style="width: 18%;">Balance</td>
+                         <td style="width: 30%;">AccountId</td>
+                          <td style="width: 30%;">GenerateId</td>
+                         
+                        
                     </tr>
                     <tbody>
                         <% 
-                        Jdbc use = new Jdbc();
-                        ArrayList<FundTransferPojo> array = (ArrayList<FundTransferPojo>)request.getAttribute("log");
-                        for (FundTransferPojo view : array) { 
+                      Jdbc jdbc=new Jdbc();
+                        ArrayList<BankAccountPojo> array =jdbc.Read();
+                        for (BankAccountPojo view : array) { 
                         %>
                         <tr>
-                            <td><%=view.getId() %></td>
-                            <td><%=view.getUsername() %></td>
-                             <td><%=view.getEmail() %></td>
-                            <td><%=view.getPassword() %></td>
-                           
-                            <td><a href="update.jsp?id=<%=  %>"><i class="material-icons">&#xE254;</i></a></td>
+                            <td><%=view.getUserId() %></td>
+                             <td><%=view.getFirstName() %></td>
+                            <td><%=view.getLastName() %></td>
+                            <td><%=view.getPhonenumber() %></td>
+                            <td><%=view.getDate() %></td>
+                            <td><%=view.getAadharNumber() %></td>
+                            <td><%=view.getIFSCcode() %></td>
+                            <td><%=view.getAddress() %></td>
+                           <td><%=view.getAccountBalance() %></td>
+                           <td><%=view.getAccountId() %></td>
                             <td>
-                                <form action="Login" method="get">
-                                    <input type="hidden" name="action" value="delete"> 
-                                    <input type="hidden" name="deleteid" value="<%=%>">
-                                    <button type="submit" title="delete"><i class="fa fa-trash"></i></button>
+                               <form action="BankAccount" method="post">
+                                    <input type="hidden" name="action" value="generateID"> 
+                                    <input type="hidden" name="generateid" value="<%=view.getUserId()%>">
+                                    <button type="submit" title="Approve">Approve</button>
                                 </form>
                             </td>
-                        </tr>
                         <% } %>
                     </tbody>
                 </table>
-            </form>
+            
         </div>
     </div>
-    <form action="Logout" method="get">
-<button type="submit" class="btn">logout</button> 
 </form>
    
         

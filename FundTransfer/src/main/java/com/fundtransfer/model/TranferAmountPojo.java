@@ -3,24 +3,29 @@ package com.fundtransfer.model;
 import java.time.LocalDate;
 
 public class TranferAmountPojo {
-long SendAccountNo,RecepientAccountNo;
-int Amount,transferId;
+String SendAccountNo,RecepientAccountNo;
+int Amount,transferId,userId;
 String IFSC,date,transfertype;
 
 
-public long getSendAccountNo() {
+
+
+
+
+
+public String getSendAccountNo() {
 	return SendAccountNo;
 }
 
-public void setSendAccountNo(long sendAccountNo) {
+public void setSendAccountNo(String sendAccountNo) {
 	SendAccountNo = sendAccountNo;
 }
 
-public long getRecepientAccountNo() {
+public String getRecepientAccountNo() {
 	return RecepientAccountNo;
 }
 
-public void setRecepientAccountNo(long recepientAccountNo) {
+public void setRecepientAccountNo(String recepientAccountNo) {
 	RecepientAccountNo = recepientAccountNo;
 }
 
@@ -38,6 +43,14 @@ public int getTransferId() {
 
 public void setTransferId(int transferId) {
 	this.transferId = transferId;
+}
+
+public int getUserId() {
+	return userId;
+}
+
+public void setUserId(int userId) {
+	this.userId = userId;
 }
 
 public String getIFSC() {
@@ -66,13 +79,14 @@ public void setTransfertype(String transfertype) {
 
 
 
-public TranferAmountPojo(long sendAccountNo, long recepientAccountNo, int amount, int transferId, String iFSC,
-		String date, String transfertype) {
+public TranferAmountPojo(String sendAccountNo, String recepientAccountNo, int amount, int transferId, int userId,
+		String iFSC, String date, String transfertype) {
 	super();
 	SendAccountNo = sendAccountNo;
 	RecepientAccountNo = recepientAccountNo;
 	Amount = amount;
 	this.transferId = transferId;
+	this.userId = userId;
 	IFSC = iFSC;
 	this.date = date;
 	this.transfertype = transfertype;
@@ -81,4 +95,14 @@ public TranferAmountPojo(long sendAccountNo, long recepientAccountNo, int amount
 public TranferAmountPojo() {
 	
 }
+
+@Override
+public String toString() {
+	return "TranferAmountPojo [SendAccountNo=" + SendAccountNo + ", RecepientAccountNo=" + RecepientAccountNo
+			+ ", Amount=" + Amount + ", transferId=" + transferId + ", userId=" + userId + ", IFSC=" + IFSC + ", date="
+			+ date + ", transfertype=" + transfertype + "]";
+}
+
+
+
 }

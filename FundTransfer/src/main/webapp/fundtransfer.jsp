@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.fundtransfer.model.FundTransferPojo" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,14 +63,30 @@
 <body>
     <div class="container">
         <h2>Fund Transfer Form</h2>
-        <form action="TransferAmount" method="get">
-        
-            <!-- Made transferType input read-only -->
+        <form action="AmountTransfer" method="post">
+            <%
+                String transferType = request.getParameter("transferType");
+                String minAmount = "1";
+                String maxAmount = "";
+
+                if ("RTGS".equals(transferType)) {
+                    minAmount = "200000"; // Minimum value for RTGS is 2 lakh
+                } else if ("IMPS".equals(transferType)) {
+                    maxAmount = "500000"; // Maximum value for IMPS is 5 lakh
+                }
+            %>
+            
+           <% 
+       
+        FundTransferPojo userId=(FundTransferPojo)session.getAttribute("user"); 
+    
+    %>
+    <input type="hidden" value="<%=userId.getId()%>" name="fundId">
             <label for="transferType">Transfer Type:</label>
-            <input type="text" id="transferType" name="transferType" value="<%= request.getParameter("transferType") %>" readonly>
+            <input type="text" id="transferType" name="transferType" value="<%= transferType %>" readonly>
             
             <label for="senderAccount">Sender Account:</label>
-            <input type="text" id="senderAccount" pattern="^[0-9]{12,13}$" name="senderAccount">
+            <input type="text" id="senderAccount"  name="senderAccount" value="<%= request.getParameter("accountId") %>">
             
             <label for="receiverAccount">Receiver Account:</label>
             <input type="text" id="receiverAccount" pattern="^[0-9]{12,13}$" name="receiverAccount">
@@ -78,7 +95,7 @@
             <input type="text" id="ifsc" pattern="^([A-Z]{4}[0][A-Z0-9]{6})$" name="ifsc">
             
             <label for="amount">Amount:</label>
-            <input type="text" id="amount" name="amount">
+            <input type="text" id="amount" name="amount" min="<%= minAmount %>" <% if (!maxAmount.isEmpty()) { %> max="<%= maxAmount %>" <% } %>>
             
             <input type="submit" value="Transfer">
         </form>
