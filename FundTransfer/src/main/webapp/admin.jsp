@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ page import="com.fundtransfer.model.BankAccountPojo"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.fundtransfer.model.BankAccountPojo"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="com.fundtransfer.util.Jdbc"%>
 <!DOCTYPE html>
-<html lang=eng>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>User Details</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
 <link rel="stylesheet"
@@ -58,8 +58,8 @@ body {
 
 table.table {
 	table-layout: fixed;
-	width:  100%; /* Set the width of the table */
-	margin: auto; /* Center the table horizontally */
+	width: 100%;
+	margin: auto;
 }
 
 table.table tr th, table.table tr td {
@@ -80,17 +80,14 @@ table.table td a {
 }
 
 table.table td a.add {
-	/* Removed color property */
 	
 }
 
 table.table td a.edit {
-	/* Removed color property */
 	
 }
 
 table.table td form.delete button {
-	/* Remove custom styling */
 	
 }
 
@@ -119,101 +116,98 @@ table.table .form-control.error {
 table.table td .add {
 	display: none;
 }
+
 .search-container {
-            float: right;
-            margin-top: 20px;
-        }
+	float: right;
+	margin-top: 20px;
+}
 
-        .search-container input[type=text] {
-            padding: 6px;
-            margin-top: 8px;
-            font-size: 17px;
-            border: none;
-            border-radius: 5px;
-        }
+.search-container input[type=text] {
+	padding: 6px;
+	margin-top: 8px;
+	font-size: 17px;
+	border: none;
+	border-radius: 5px;
+}
 
-        .search-container button {
-            float: right;
-            padding: 6px 10px;
-            margin-top: 8px;
-            margin-right: 16px;
-            background: #ddd;
-            font-size: 17px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+.search-container button {
+	float: right;
+	padding: 6px 10px;
+	margin-top: 8px;
+	margin-right: 16px;
+	background: #ddd;
+	font-size: 17px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
 
-        .search-container button:hover {
-            background: #ccc;
-        }
+.search-container button:hover {
+	background: #ccc;
+}
 </style>
 </head>
 <body>
-<body>
-    <div class="container">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <h2>User <b>Details</b></h2>
-                    </div>
-                    <div class="col-sm-4">
-                    </div>
-                </div>
-            </div>
-            
-                <table border="1" class="table">
-                    <tr>
-                        <th style="width: 8%;">ID</th>
-                        <th style="width: 20%;">FirstName</th>
-                        <th style="width: 20%;">LastName</th>
-                        <th style="width: 30%;">PhoneNumber</th>
-                        <th style="width: 20%;">Date</th>
-                        <th style="width: 30%;">AadharNumber</th>
-                        <th style="width: 30%;">IFSCcode</th>
-                        <th style="width: 40%;">Address</th>
-                        <th style="width: 18%;">Balance</th>
-                         <th style="width: 30%;">AccountId</th>
-                          <th style="width: 30%;">GenerateId</th>
-                         
-                        
-                    </tr>
-                    <tbody>
-                        <% 
-                      Jdbc jdbc=new Jdbc();
-                        ArrayList<BankAccountPojo> array =jdbc.read();
-                        for (BankAccountPojo view : array) { 
-                        %>
-                        <tr>
-                            <td><%=view.getUserId() %></td>
-                             <td><%=view.getFirstName() %></td>
-                            <td><%=view.getLastName() %></td>
-                            <td><%=view.getPhonenumber() %></td>
-                            <td><%=view.getDate() %></td>
-                            <td><%=view.getAadharNumber() %></td>
-                            <td><%=view.getiFSCcode() %></td>
-                            <td><%=view.getAddress() %></td>
-                           <td><%=view.getAccountBalance() %></td>
-                           <td><%=view.getAccountId() %></td>
-                            <td>
-                               <form action="BankAccount" method="post">
-                                    <input type="hidden" name="action" value="generateID"> 
-                                    <input type="hidden" name="generateid" value="<%=view.getUserId()%>">
-                                    <button type="submit" title="Approve">Approve</button>
-                                </form>
-                            </td>
-                        <% } %>
-                    </tbody>
-                </table>
-            
-        </div>
-    </div>
-</form>
-   
-        
-   
-</body>
-	
+	<div class="container">
+		<div class="table-wrapper">
+			<div class="table-title">
+				<div class="row">
+					<div class="col-sm-8">
+						<h2>
+							User <b>Details</b>
+						</h2>
+					</div>
+					<div class="col-sm-4">
+						
+						<form action="home.jsp" method="post">
+							<button type="submit" class="btn btn-danger pull-right">Logout</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<table border="1" class="table">
+				<tr>
+					<th style="width: 8%;">ID</th>
+					<th style="width: 20%;">FirstName</th>
+					<th style="width: 20%;">LastName</th>
+					<th style="width: 30%;">PhoneNumber</th>
+					<th style="width: 20%;">Date</th>
+					<th style="width: 30%;">AadharNumber</th>
+					<th style="width: 30%;">IFSCcode</th>
+					<th style="width: 40%;">Address</th>
+					<th style="width: 18%;">Balance</th>
+					<th style="width: 30%;">AccountId</th>
+					<th style="width: 30%;">GenerateId</th>
+				</tr>
+				<tbody>
+					<% 
+            Jdbc jdbc = new Jdbc();
+            ArrayList<BankAccountPojo> array = jdbc.read();
+            for (BankAccountPojo view : array) { 
+            %>
+					<tr>
+						<td><%=view.getUserId() %></td>
+						<td><%=view.getFirstName() %></td>
+						<td><%=view.getLastName() %></td>
+						<td><%=view.getPhonenumber() %></td>
+						<td><%=view.getDate() %></td>
+						<td><%=view.getAadharNumber() %></td>
+						<td><%=view.getiFSCcode() %></td>
+						<td><%=view.getAddress() %></td>
+						<td><%=view.getAccountBalance() %></td>
+						<td><%=view.getAccountId() %></td>
+						<td>
+							<form action="BankAccount" method="post">
+								<input type="hidden" name="action" value="generateID"> <input
+									type="hidden" name="generateid" value="<%=view.getUserId()%>">
+								<button type="submit" title="Approve">Approve</button>
+							</form>
+						</td>
+						<% } %>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 </html>

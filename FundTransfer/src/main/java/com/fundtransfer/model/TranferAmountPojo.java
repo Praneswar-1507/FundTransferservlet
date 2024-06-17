@@ -1,6 +1,5 @@
 package com.fundtransfer.model;
 
-import java.time.LocalDate;
 
 public class TranferAmountPojo {
 String sendAccountNo,recepientAccountNo;

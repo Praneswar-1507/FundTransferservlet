@@ -20,39 +20,43 @@ import com.fundtransfer.util.Jdbc;
 public class TransactionHistory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Jdbc crud = new Jdbc();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TransactionHistory() {
-        super();
-        
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-    @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public TransactionHistory() {
+		super();
+
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		int userId=Integer.parseInt(request.getParameter("userId"));
-		ArrayList<TranferAmountPojo> history=null;
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		ArrayList<TranferAmountPojo> history = null;
 		try {
-			history=crud.TransactionDetails(userId);
+			history = crud.transactionDetails(userId);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 		request.setAttribute("usertransaction", history);
-		 request.getRequestDispatcher("transactionhistory.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("transactionhistory.jsp").forward(request, response);
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 
