@@ -100,16 +100,7 @@ a {
 				</div>
 			</a>
 		</div>
-		<div class="box">
-			<a
-				href="fundtransfer.jsp?transferTypeaccountId=<%= request.getParameter("accountNo") %>">
-				<div class="card">
-					<div class="card-header">IMPS</div>
-					<div class="card-text">
-					</div>
-				</div>
-			</a>
-		</div>
+		
 	</div>
 
 </body>

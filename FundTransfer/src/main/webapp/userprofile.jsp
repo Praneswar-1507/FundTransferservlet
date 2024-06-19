@@ -122,10 +122,10 @@
     }
 
     .balance-card h3 {
-        color: #ff5733; /* Red color for balance amount */
+        color: #ff5733; 
     }
 
-    /* Popup Form CSS */
+
     .popup {
         display: none;
         position: fixed;

@@ -87,7 +87,6 @@ public class TransferOnline extends HttpServlet {
 					try {
 						details = crud.getdetails(id.getId());
 						session.setAttribute("beneficiarydetails", details);
-						System.out.println(details);
 					} catch (ClassNotFoundException | SQLException e) {
 						
 						e.printStackTrace();

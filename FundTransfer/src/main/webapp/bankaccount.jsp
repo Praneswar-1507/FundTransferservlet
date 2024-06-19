@@ -81,7 +81,7 @@ input[type="submit"]:hover {
 					name="dob" required>
 			</div>
 			<div class="form-group">
-				<label for="aadharnumber">Aadhar Number</label> <input type="number"
+				<label for="aadharnumber">Aadhar Number</label> <input type="text"
 					id="aadharnumber" name="aadharnumber" pattern="[0-9]{12}" required>
 			</div>
 			<div class="form-group">

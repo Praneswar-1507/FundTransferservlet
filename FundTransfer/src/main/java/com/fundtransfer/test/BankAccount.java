@@ -188,14 +188,14 @@ public class BankAccount extends HttpServlet {
 			request.getRequestDispatcher(USER_PROFILE_PAGE).forward(request, response);
 			break;
 		case "beneficiary":
-			int UserBeneficiary = Integer.parseInt(request.getParameter("userId"));
+			int userBeneficiary = Integer.parseInt(request.getParameter("userId"));
 			String beneficiaryName=request.getParameter("beneficiaryName");
 			String beneficiaryAccountId=request.getParameter("accountID");
 			String beneficiaryIfscCode=request.getParameter("ifscCode");
 			beneficiary.setBeneficiaryName(beneficiaryName);
 			beneficiary.setBeneficiaryAccountId(beneficiaryAccountId);
 			beneficiary.setIfsccode(beneficiaryIfscCode);
-			beneficiary.setUserId(UserBeneficiary);
+			beneficiary.setUserId(userBeneficiary);
 			try {
 				crud.beneficiaryInsert(beneficiary);
 			} catch (ClassNotFoundException | SQLException e) {
@@ -204,10 +204,9 @@ public class BankAccount extends HttpServlet {
 			}
 			ArrayList<Beneficiary> details=null;
 			try {
-				details = crud.getdetails(UserBeneficiary);
+				details = crud.getdetails(userBeneficiary);
 				HttpSession session = request.getSession();
 				session.setAttribute("beneficiarydetails", details);
-				System.out.println(details);
 			} catch (ClassNotFoundException | SQLException e) {
 				
 				e.printStackTrace();

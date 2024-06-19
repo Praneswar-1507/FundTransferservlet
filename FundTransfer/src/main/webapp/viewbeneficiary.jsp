@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="com.fundtransfer.model.Beneficiary"%>
-<%@ page import="com.fundtransfer.model.FundTransferPojo"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.fundtransfer.model.Beneficiary" %>
+<%@ page import="com.fundtransfer.model.FundTransferPojo" %>
 <!DOCTYPE html>
-<html>
+<html lang="eng">
 <head>
 <meta charset="ISO-8859-1">
 <title>Beneficiary Management</title>
@@ -71,6 +71,7 @@
     .table-container {
         flex-grow: 1;
         padding: 20px;
+        position: relative; /* Ensure relative positioning */
     }
 
     table {
@@ -93,25 +94,29 @@
 
     /* Popup form styling */
     .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
+        display: none; /* Initially hidden */
+        visibility: hidden; /* Ensure hidden state */
+        position: fixed; /* Position fixed for overlay */
         z-index: 1; /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .modal-content {
         background-color: #fefefe;
-        margin: 15% auto; /* 15% from the top and centered */
         padding: 20px;
         border: 1px solid #888;
-        width: 80%; /* Could be more or less, depending on screen size */
+        width: 60%; /* Adjust width as needed */
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         border-radius: 5px;
+        max-height: 80%; /* Limit height to prevent overflow */
+        overflow-y: auto; /* Enable vertical scrolling if needed */
     }
 
     .close {
@@ -119,13 +124,13 @@
         float: right;
         font-size: 28px;
         font-weight: bold;
+        cursor: pointer;
     }
 
     .close:hover,
     .close:focus {
         color: black;
         text-decoration: none;
-        cursor: pointer;
     }
 
     /* Style for form fields */
@@ -158,101 +163,100 @@
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h2><i class="fas fa-piggy-bank"></i> fastpay</h2>
-        </div>
-        <ul>
-            <li><a href="userprofile.jsp"><i class="fas fa-key"></i> UserProfile</a></li>
-            <li><a href="#" onclick="openPopup()"><i class="fas fa-user"></i> Deposit</a></li>
-            <li><a href="#"><i class="fas fa-history"></i> Transaction History</a></li>
-        </ul>
+<!-- Sidebar -->
+<div class="sidebar">
+    <div class="sidebar-header">
+        <h2><i class="fas fa-piggy-bank"></i> fastpay</h2>
     </div>
-     <%
+    <ul>
+        <li><a href="userprofile.jsp"><i class="fas fa-key"></i> UserProfile</a></li>
+        <!-- Remove onclick from here -->
+        <li><a href="#"><i class="fas fa-history"></i> Transaction History</a></li>
+    </ul>
+</div>
+<%
             FundTransferPojo userId = (FundTransferPojo) session.getAttribute("user");
             %>
-
-    <!-- Popup Form -->
-    <div id="editBeneficiaryForm" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h2>Edit Beneficiary</h2>
-            <form id="editForm" action="BeneficiaryEdit" method="post">
-                <input type="hidden" id="editBeneficiaryId" name="editBeneficiaryId">
-                <label for="editBeneficiaryName">Beneficiary Name:</label>
-                <input type="text" id="editBeneficiaryName" name="editBeneficiaryName" required>
-                <label for="editBeneficiaryAccountId">Beneficiary Account ID:</label>
-                <input type="text" id="editBeneficiaryAccountId" name="editBeneficiaryAccountId" required>
-                <label for="editBeneficiaryIfscCode">Beneficiary IFSC Code:</label>
-                <input type="text" id="editBeneficiaryIfscCode" name="editBeneficiaryIfscCode" required>
-                <input type="hidden" name="viewid" value="<%=userId.getId()%>">
-                <input type="hidden" name="action" value="editbeneficiary">
-                <button type="submit">Save Changes</button>
-            </form>
-        </div>
-    </div>
-    
-
-    <!-- Table Container -->
-    <div class="table-container">
-        <table>
-            <thead>
+<!-- Main Content -->
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Beneficiary Id</th>
+                <th>Beneficiary Name</th>
+                <th>Beneficiary Account ID</th>
+                <th>Beneficiary IFSC</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% ArrayList<Beneficiary> beneficiaryList = (ArrayList<Beneficiary>) request.getAttribute("userbeneficiary"); %>
+            <% for (Beneficiary view : beneficiaryList) { %>
                 <tr>
-                    <th>Beneficiary Id</th>
-                    <th>Beneficiary Name</th>
-                    <th>Beneficiary Account ID</th>
-                    <th>Beneficiary IFSC</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <td><%= view.getBeneficiaryId() %></td>
+                    <td><%= view.getBeneficiaryName() %></td>
+                    <td><%= view.getBeneficiaryAccountId() %></td>
+                    <td><%= view.getIfsccode() %></td>
+                    <td>
+                        <!-- Edit Button -->
+                        <button type="button" class="edit-button" onclick="openPopup('<%= view.getBeneficiaryId() %>', '<%= view.getBeneficiaryName() %>', '<%= view.getBeneficiaryAccountId() %>', '<%= view.getIfsccode() %>')">
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <!-- Delete Form -->
+                        <form action="BeneficiaryEdit" method="post">
+                            <input type="hidden" name="viewid" value="<%= userId.getId() %>">
+                            <input type="hidden" name="action" value="deletebeneficiary">
+                            <input type="hidden" name="deleteid" value="<%= view.getBeneficiaryId() %>">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <% ArrayList<Beneficiary> beneficiaryList = (ArrayList<Beneficiary>) request.getAttribute("userbeneficiary"); %>
-                <% for (Beneficiary view : beneficiaryList) { %>
-                    <tr>
-                        <td><%= view.getBeneficiaryId() %></td>
-                        <td><%= view.getBeneficiaryName() %></td>
-                        <td><%= view.getBeneficiaryAccountId() %></td>
-                        <td><%= view.getIfsccode() %></td>
-                        <td>
-                            <!-- Edit Button -->
-                            <button type="button" class="edit-button"
-                                onclick="openPopup('<%= view.getBeneficiaryId() %>', '<%= view.getBeneficiaryName() %>', '<%= view.getBeneficiaryAccountId() %>', '<%= view.getIfsccode() %>')">
-                                Edit
-                            </button>
-                        </td>
-                        <td>
-                            <!-- Delete Form -->
-                            <form action="BeneficiaryEdit" method="post">
-                                <input type="hidden" name="viewid" value="<%= %>">
-                                <input type="hidden" name="action" value="deletebeneficiary">
-                                <input type="hidden" name="deleteid" value="<%= view.getBeneficiaryId() %>">
-                                <button type="submit">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+
+<div id="editBeneficiaryForm" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2>Edit Beneficiary</h2>
+        <form id="editForm" action="BeneficiaryEdit" method="post">
+            <input type="hidden" id="editBeneficiaryId" name="editBeneficiaryId">
+            <label for="editBeneficiaryName">Beneficiary Name:</label>
+            <input type="text" id="editBeneficiaryName" name="editBeneficiaryName" required>
+            <label for="editBeneficiaryAccountId">Beneficiary Account ID:</label>
+            <input type="text" id="editBeneficiaryAccountId" name="editBeneficiaryAccountId" required>
+            <label for="editBeneficiaryIfscCode">Beneficiary IFSC Code:</label>
+            <input type="text" id="editBeneficiaryIfscCode" name="editBeneficiaryIfscCode" required>
+            <input type="hidden" name="id" value="<%= userId.getId() %>">
+            <input type="hidden" name="action" value="editbeneficiary">
+            <button type="submit">Save Changes</button>
+        </form>
     </div>
+</div>
 
-    <!-- JavaScript for Popup and Edit Buttons -->
-    <script>
-        // Function to open the popup form and pre-fill data
-        function openPopup(beneficiaryId, beneficiaryName, beneficiaryAccountId, beneficiaryIfscCode) {
-            document.getElementById('editBeneficiaryId').value = beneficiaryId;
-            document.getElementById('editBeneficiaryName').value = beneficiaryName;
-            document.getElementById('editBeneficiaryAccountId').value = beneficiaryAccountId;
-            document.getElementById('editBeneficiaryIfscCode').value = beneficiaryIfscCode;
-            document.getElementById('editBeneficiaryForm').style.display = 'block';
-        }
 
-        // Function to close the popup form
-        function closePopup() {
-            document.getElementById('editBeneficiaryForm').style.display = 'none';
-        }
-    </script>
+<script>
+    function openPopup(beneficiaryId, beneficiaryName, beneficiaryAccountId, beneficiaryIfscCode) {
+        document.getElementById('editBeneficiaryId').value = beneficiaryId;
+        document.getElementById('editBeneficiaryName').value = beneficiaryName;
+        document.getElementById('editBeneficiaryAccountId').value = beneficiaryAccountId;
+        document.getElementById('editBeneficiaryIfscCode').value = beneficiaryIfscCode;
+        var modal = document.getElementById('editBeneficiaryForm');
+        modal.style.display = 'flex'; 
+        modal.style.visibility = 'visible'; 
+    }
+
+    function closePopup() {
+        var modal = document.getElementById('editBeneficiaryForm');
+        modal.style.display = 'none';
+        modal.style.visibility = 'hidden';
+    }
+</script>
 
 </body>
 </html>

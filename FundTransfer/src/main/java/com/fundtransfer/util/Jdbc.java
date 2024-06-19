@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
+
 
 import com.fundtransfer.model.BankAccountPojo;
 import com.fundtransfer.model.Beneficiary;
@@ -307,12 +307,12 @@ public class Jdbc {
         preparedStatement.setInt(2, userId);
         preparedStatement.executeUpdate();
     }
-    public void updateBeneficiaryAccountBalance(int BeneficiaryAccountId,int balance) throws Exception {
+    public void updateBeneficiaryAccountBalance(int beneficiaryAccountId,int balance) throws Exception {
         Connection connection = Util.getConnection(); 
         String query = "UPDATE beneficiary SET account_Balance=?  WHERE beneficiary_ID = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1,balance);
-        preparedStatement.setInt(2, BeneficiaryAccountId);
+        preparedStatement.setInt(2, beneficiaryAccountId);
         preparedStatement.executeUpdate();
     }
 
@@ -406,6 +406,7 @@ public class Jdbc {
                 info.setBeneficiaryBalance(rs.getInt("account_balance"));
                 
                 beneficiaryList.add(info);
+                System.out.println(beneficiaryList);
             }
             
         } catch (SQLException e) {
@@ -464,4 +465,18 @@ public class Jdbc {
            
        
     }
+    public static void updateUser(Beneficiary beneficiary) throws ClassNotFoundException, SQLException {
+	
+		Connection connection = Util.getConnection();
+		String query = "update beneficiary set beneficiary_name=?,account_ID=?,ifsccode=? where beneficiary_ID=?";
+		PreparedStatement ps = connection.prepareStatement(query);
+
+		ps.setString(1,beneficiary.getBeneficiaryName());
+
+		ps.setString(2,beneficiary.getBeneficiaryAccountId());
+		ps.setString(3,beneficiary.getIfsccode());
+		ps.setInt(4,beneficiary.getBeneficiaryId());
+		int row = ps.executeUpdate();
+		
+	}
 }

@@ -64,12 +64,11 @@ public class AmountTransfer extends HttpServlet {
         String transferType = request.getParameter("type");
         String senderAccount = request.getParameter("senderAccount");
         String receiverAccount = request.getParameter("receiverAccount");
-        System.out.println(receiverAccount);
         String iFSC = request.getParameter("ifsc");
         int amount = Integer.parseInt(request.getParameter("amount"));
         int beneficiaryId = Integer.parseInt(request.getParameter("beneficiaryId"));
 
-        System.out.println(beneficiaryId); 
+       
         fundTransfer.setUserId(userId);
         fundTransfer.setSendAccountNo(senderAccount);
         fundTransfer.setRecepientAccountNo(receiverAccount);
@@ -95,7 +94,6 @@ public class AmountTransfer extends HttpServlet {
            
             remainingAmount = userAccount.getAccountBalance() - amount;
             remainingBeneficiaryAmount=beneficiary.getBeneficiaryBalance()+amount;
-            System.out.println(remainingBeneficiaryAmount);
 
           
             crud.updatedAccountBalance(userId, remainingAmount);

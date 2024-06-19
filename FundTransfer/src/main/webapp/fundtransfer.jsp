@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.fundtransfer.model.FundTransferPojo"%>
-<%@ page import="com.fundtransfer.model.Beneficiary"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,9 +87,7 @@ select {
             <% 
                 FundTransferPojo userId=(FundTransferPojo)session.getAttribute("user"); 
             %>
-            <% 
-                Beneficiary beneficiary=(Beneficiary)session.getAttribute("beneficiarydetails"); 
-            %>
+           
             <input type="hidden" value="<%=userId.getId()%>" name="fundId">
             
             <label for="transferType">Sender Account:</label>
